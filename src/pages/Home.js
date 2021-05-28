@@ -1,6 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadGames, getMoreGames } from '../store/actions/gamesAction';
+import {
+  loadGames,
+  getMoreGames,
+  getOrderBy,
+} from '../store/actions/gamesAction';
 
 // Components
 import Game from '../components/Game';
@@ -20,6 +24,10 @@ const Games = styled(motion.div)`
 
   @media screen and (max-width: 1023px) {
     grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (max-width: 599px) {
+    grid-template-columns: 1fr;
   }
 `;
 
@@ -91,6 +99,7 @@ const Home = () => {
     loading,
     isEnding,
   } = useSelector((state) => state.games);
+  const selectRef = useRef();
 
   //Fetch games
   const dispatch = useDispatch();
@@ -110,6 +119,10 @@ const Home = () => {
   const handleLoadMore = () => {
     dispatch(getMoreGames(page, searchQuery));
   };
+
+  // const handleOrderBy = () => {
+  //   dispatch(getOrderBy(selectRef.current.value));
+  // };
 
   return (
     <>
@@ -140,16 +153,16 @@ const Home = () => {
         <>
           <TitleContainer>
             <h2>Explore Games</h2>
-            {/* <form>
+            {/* <div>
               <label>Order by: </label>
-              <select>
+              <select ref={selectRef} onChange={handleOrderBy}>
                 <option value="">Relevance</option>
                 <option value="name">Name</option>
                 <option value="-added">Date added</option>
                 <option value="-rating">Popularity</option>
-                <option value="-release">Release date</option>
+                <option value="-released">Release date</option>
               </select>
-            </form> */}
+            </div> */}
           </TitleContainer>
           <Games>
             {games.map((game) => (

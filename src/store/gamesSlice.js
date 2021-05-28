@@ -54,6 +54,10 @@ const gamesSlice = createSlice({
     loadingButton(state) {
       state.buttonLoading = true;
     },
+    orderBy(state, action) {
+      state.games = action.payload.games;
+      state.loading = false;
+    },
   },
 });
 
@@ -65,5 +69,6 @@ export const {
   loadingButton,
   resetPage,
   loading,
+  orderBy,
 } = gamesSlice.actions;
 export default gamesSlice.reducer;

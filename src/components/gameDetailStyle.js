@@ -69,6 +69,13 @@ export const Detail = styled(motion.div)`
       margin-bottom: 1rem;
     }
   }
+
+  @media screen and (max-width: 767px) {
+    padding: 5rem;
+    h3 {
+      font-size: 2rem;
+    }
+  }
 `;
 
 export const Stats = styled(motion.div)`
@@ -79,6 +86,35 @@ export const Stats = styled(motion.div)`
   .rating .rating-value {
     color: #ff7676;
     font-weight: 600;
+  }
+
+  h3.title {
+    display: flex;
+    align-items: center;
+  }
+
+  h3.title span {
+    color: green;
+    display: inline-block;
+    font-size: 1.8rem;
+    border: 1px solid;
+    padding: 1rem;
+    margin-left: 1rem;
+  }
+
+  h3.title span.medium {
+    color: #fdca52;
+    border-color: rgba(253, 202, 82, 0.4);
+  }
+
+  h3.title span.high {
+    color: #6dc849;
+    border-color: rgba(109, 200, 73, 0.4);
+  }
+
+  h3.title span.low {
+    color: #fc4b37;
+    border-color: rgba(252, 75, 55, 0.4);
   }
 
   @media screen and (max-width: 1023px) {
@@ -132,9 +168,14 @@ export const Media = styled(motion.div)`
 `;
 
 export const Description = styled(motion.div)`
-  margin: 5rem 0;
+  margin: 5rem 0 2.5rem;
+
   p {
     line-height: 1.8;
+  }
+
+  p:not(:last-child) {
+    margin-bottom: 0.5rem;
   }
 
   span {
@@ -147,4 +188,26 @@ export const Gallery = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
+
+  @media screen and (max-width: 599px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+export const Stores = styled.div`
+  margin-bottom: 2.5rem;
+
+  ul {
+    margin-top: 1rem;
+    margin-left: 2rem;
+  }
+
+  li::marker {
+    color: rgba(245, 245, 245, 0.6);
+  }
+
+  a {
+    display: inline-block;
+    margin: 0.5rem;
+  }
 `;

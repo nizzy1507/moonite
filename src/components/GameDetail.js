@@ -15,6 +15,7 @@ import {
   Media,
   Description,
   Gallery,
+  Stores,
 } from './gameDetailStyle';
 
 // Images
@@ -25,6 +26,7 @@ import nintendo from '../img/nintendo.svg';
 import apple from '../img/apple.svg';
 import gamepad from '../img/gamepad.svg';
 import linux from '../img/linux.svg';
+import android from '../img/android.svg';
 
 const GameDetail = () => {
   const { detail, screenshots, isLoading } = useSelector(
@@ -45,9 +47,12 @@ const GameDetail = () => {
       case 'Nintendo':
         return nintendo;
       case 'Apple Macintosh':
+      case 'iOS':
         return apple;
       case 'Linux':
         return linux;
+      case 'Android':
+        return android;
       default:
         return gamepad;
     }
@@ -77,12 +82,28 @@ const GameDetail = () => {
     }
   };
 
+  const metaScore = (score) => {
+    if (score > 80) return 'high';
+    if (score < 80 && score > 60) return 'medium';
+    if (score < 60) return 'low';
+  };
+
   return (
     <CardShadow className="shadow" onClick={handleCloseCard}>
       <Detail layoutId={id}>
         <Stats>
           <div className="rating">
-            <h3>{detail.name}</h3>
+            <h3 className="title">
+              {detail.name}
+              {detail.metacritic && (
+                <span
+                  title="Metascore"
+                  className={metaScore(detail.metacritic)}
+                >
+                  {detail.metacritic}
+                </span>
+              )}
+            </h3>
             <p>
               Rating: <span className="rating-value">{detail.rating}</span> / 5
             </p>
@@ -109,10 +130,63 @@ const GameDetail = () => {
             />
           </div>
           <Description>
-            <p>
-              <span>Description:</span> {detail.description_raw}
-            </p>
+            {detail.description_raw && (
+              <p>
+                <span>About:</span> {detail.description_raw}
+              </p>
+            )}
+            {detail.genres && (
+              <p>
+                <span>Genre:</span>{' '}
+                {detail.genres.map((genre) => genre.name).join(', ')}
+              </p>
+            )}
+            {detail.developers && (
+              <p>
+                <span>Developer:</span> {detail.developers[0].name}
+              </p>
+            )}
+            {detail.publishers && (
+              <p>
+                <span>Publisher:</span> {detail.publishers[0].name}
+              </p>
+            )}
+            {detail.platforms && (
+              <p>
+                <span>Platforms:</span>{' '}
+                {detail.platforms
+                  .map(({ platform }) => platform.name)
+                  .join(', ')}
+              </p>
+            )}
+            {detail.esrb_rating && (
+              <p>
+                <span>Age rating:</span> {detail.esrb_rating.name}
+              </p>
+            )}
+            {detail.tags && (
+              <p>
+                <span>Tags:</span>{' '}
+                {detail.tags.map((tag) => tag.name).join(', ')}
+              </p>
+            )}
           </Description>
+          <Stores>
+            <p>You can visit these stores to buy the game: </p>
+            <ul>
+              {detail.stores.map(({ id, store }) => (
+                <li key={id}>
+                  <a
+                    href={`https://${store.domain}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {store.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Stores>
           <Gallery>
             {screenshots.results?.map((src, index) => (
               <img

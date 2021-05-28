@@ -1,11 +1,12 @@
 import axios from 'axios';
-import { searchGameURL, gamesListURL } from '../../api';
+import { searchGameURL, gamesListURL, orderByURL } from '../../api';
 import {
   replaceGames,
   searchGames,
   loadMoreGames,
   loadingButton,
   loading,
+  orderBy,
 } from '../gamesSlice';
 
 let searchPage = 1;
@@ -60,3 +61,9 @@ export const getMoreGames =
       loadMoreGames({ moreGames: moreGamesResults.data.results, isEnding })
     );
   };
+
+export const getOrderBy = (value) => async (dispatch) => {
+  dispatch(loading());
+  const newList = await axios(orderByURL(value));
+  dispatch(orderBy({ games: newList.data.results }));
+};

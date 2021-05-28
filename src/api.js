@@ -33,7 +33,7 @@ export const newGamesURL = `${BASE_URL}${NEW_GAMES}`;
 
 //Main list
 export const gamesListURL = (page) =>
-  `${BASE_URL}/games?ordering=-rating&page=${page}&page_size=12&key=${API_KEY}`;
+  `${BASE_URL}/games?ordering=-added&page=${page}&page_size=12&key=${API_KEY}`;
 
 // Game detail
 export const gameDetailsURL = (id) => `${BASE_URL}/games/${id}?key=${API_KEY}`;
