@@ -1,7 +1,6 @@
 // Animation
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
-import logo from '../img/logo.svg';
 import moonLogo from '../img/moon.svg';
 import { getSearchGames } from '../store/actions/gamesAction';
 import { clearSearch } from '../store/gamesSlice';

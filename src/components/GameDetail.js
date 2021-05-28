@@ -1,5 +1,3 @@
-import styled, { keyframes } from 'styled-components';
-import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { loadDetail } from '../store/actions/detailAction';
