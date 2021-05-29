@@ -1,10 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  loadGames,
-  getMoreGames,
-  getOrderBy,
-} from '../store/actions/gamesAction';
+import { loadGames, getMoreGames } from '../store/actions/gamesAction';
 
 // Components
 import Game from '../components/Game';
@@ -99,7 +95,7 @@ const Home = () => {
     loading,
     isEnding,
   } = useSelector((state) => state.games);
-  const selectRef = useRef();
+  // const selectRef = useRef();
 
   //Fetch games
   const dispatch = useDispatch();
